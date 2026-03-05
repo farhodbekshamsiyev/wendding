@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const introVideo = document.getElementById('envelope-video');
 
     if (introScreen && introVideo) {
+        // Показываем первый кадр видео сразу при загрузке
+        introVideo.addEventListener('loadeddata', () => {
+            introVideo.currentTime = 0.001;
+        }, { once: true });
+        introVideo.load();
+
         // Проигрывание видео и МУЗЫКИ по клику
         introScreen.addEventListener('click', () => {
             introVideo.play().catch(e => console.log("Intro video play failed:", e));
