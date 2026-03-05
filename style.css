@@ -30,7 +30,7 @@ body {
     font-family: var(--font-body);
     color: var(--text-primary);
     background-color: var(--bg-paper);
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
     -webkit-font-smoothing: antialiased;
 }
@@ -90,6 +90,27 @@ body {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+}
+
+/* Подсказка "Нажмите, чтобы открыть" */
+.tap-hint {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: tap-pulse 2s ease-in-out infinite;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes tap-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 h1,
@@ -1182,7 +1203,7 @@ h4,
     color: #fff;
 }
 
-.hidden {
+.hidden:not(.main-content):not(#intro-screen) {
     display: none !important;
     margin-top: 0 !important;
 }
