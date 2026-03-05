@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+		<title>Приглашение на свадьбу | Oybek & Shakhzoda</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+	</head>
+
+	<body>
+		<!-- ИНТРО-ЭКРАН (OVERLAY) -->
+		<div id="intro-screen">
+			<video id="envelope-video" playsinline muted preload="auto">
+				<source src="video/open.webm" type="video/mp4" />
+				Ваш браузер не поддерживает видео.
+			</video>
+		</div>
+
+		<!-- ЦВЕТЫ НА ФОНЕ (Старые лепестки) -->
+		<div id="falling-flowers"></div>
+
+		<audio id="bg-music" loop>
+			<source src="audio/hedwigs_theme.mp3" type="audio/mpeg" />
+		</audio>
+
+		<!-- ПОЛНОЭКРАННЫЙ РОСКОШНЫЙ КОНВЕРТ ЗАКОММЕНТИРОВАН -->
+		<!--
+    <div id="envelope-wrapper" class="envelope-wrapper">
+        ... (старый код конверта) ...
+    </div>
+    -->
+
+		<div id="main-content" class="main-content hidden">
+			<!-- HERO -->
+			<section class="hero" id="home">
+				<div class="hero-video-wrapper">
+					<video
+						id="hero-cake-video"
+						class="hero-video"
+						playsinline
+						muted
+						loop
+						autoplay
+					>
+						<source src="video/cake.webm" type="video/mp4" />
+					</video>
+					<div class="hero-overlay"></div>
+				</div>
+
+				<!-- Текст позиционируется абсолютно, чтобы быть на "макушке" торта -->
+				<div class="hero-content text-center">
+					<p class="pre-title">
+						Торжественно клянемся, что замышляем<br />только шалость... и
+						свадьбу!
+					</p>
+					<h1 class="names">Oybek & Shakhzoda</h1>
+					<p class="date">11 aprel 2026</p>
+				</div>
+
+				<a href="#rsvp" class="scroll-down">
+					ПОДТВЕРДИТЕ ПРИСУТСТВИЕ
+					<br />
+					<span>﹀</span>
+				</a>
+
+				<button
+					id="audio-toggle"
+					class="audio-toggle"
+					aria-label="Toggle music"
+				>
+					<svg
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+					>
+						<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+						<path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+						<path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+					</svg>
+				</button>
+			</section>
+
+			<div class="section-divider"><span>♥</span></div>
+
+			<!-- ТАЙМЕР -->
+			<section class="countdown-section section-padding">
+				<div class="container text-center">
+					<p class="section-subtitle">ОБРАТНЫЙ ОТСЧЕТ</p>
+					<h2 class="section-title">Для самого особенного дня</h2>
+
+					<div class="countdown" id="countdown">
+						<!-- Убраны квадраты, легкий стиль -->
+						<div class="time-box">
+							<span id="days">00</span>
+							<p>ДНЕЙ</p>
+						</div>
+						<div class="time-box">
+							<span id="hours">00</span>
+							<p>ЧАСОВ</p>
+						</div>
+						<div class="time-box">
+							<span id="minutes">00</span>
+							<p>МИНУТ</p>
+						</div>
+						<div class="time-box">
+							<span id="seconds">00</span>
+							<p>СЕКУНД</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="section-divider"><span>♥</span></div>
+
+			<!-- ДЕТАЛИ ДНЯ -->
+			<section class="details-section section-padding bg-alt">
+				<div class="container text-center">
+					<h2 class="section-title">Day Details</h2>
+					<p class="section-subtitle-dark">Всё, что вам нужно знать</p>
+
+					<div class="location-card">
+						<div class="pin-icon-wrapper">
+							<div class="pin-icon">
+								<svg
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+								>
+									<path
+										d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+									></path>
+									<circle cx="12" cy="10" r="3"></circle>
+								</svg>
+							</div>
+						</div>
+						<h3 class="location-title">Локация</h3>
+						<p class="location-name">Restaurant "MO'JIZA"</p>
+						<p class="location-address">
+							Qarshi shahar Samarqand MFY, Jayhun 7/34
+						</p>
+						<p class="location-time">
+							<svg
+								viewBox="0 0 24 24"
+								width="14"
+								height="14"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<circle cx="12" cy="12" r="10"></circle>
+								<polyline points="12 6 12 12 16 14"></polyline>
+							</svg>
+							С 18:00 до 23:00
+						</p>
+
+						<div class="real-map-container">
+							<p class="map-hint">Карта указывает путь к замку торжества...</p>
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12053.844976767174!2d65.79250000000002!3d38.854166699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4ea6c0a5b5658b%3A0xb3de86a7d2e080af!2sQarshi%2C%20Uzbekistan!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+								width="100%"
+								height="300"
+								style="border: 0"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+							>
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="section-divider"><span>♥</span></div>
+
+			<!-- ПРОГРАММА ДНЯ -->
+			<section class="timeline-section section-padding">
+				<div class="container text-center">
+					<h2 class="section-title">Программа дня</h2>
+					<p class="section-subtitle-dark">То, что мы для вас приготовили</p>
+
+					<div class="timeline-horizontal">
+						<div class="timeline-h-item">
+							<div class="timeline-h-icon">
+								<svg
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+								>
+									<path d="M18 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+									<circle cx="12" cy="7" r="4"></circle>
+								</svg>
+							</div>
+							<div class="timeline-time">18:00</div>
+							<h4>Сбор гостей</h4>
+							<p>Ресепшн</p>
+						</div>
+
+						<div class="timeline-h-item">
+							<div class="timeline-h-icon">
+								<svg
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.5"
+								>
+									<path
+										d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+									></path>
+								</svg>
+							</div>
+							<div class="timeline-time">18:30</div>
+							<h4>Начало свадьбы</h4>
+							<p>Ресепшн / Церемония</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="section-divider"><span>♥</span></div>
+
+			<!-- ПОДАРКИ (Полностью на русском, с анимацией) -->
+			<section class="gifts-section section-padding bg-alt">
+				<div class="container text-center">
+					<h2 class="section-title">Подарки</h2>
+					<p class="section-text-styled">
+						Ваше присутствие для нас — самый главный подарок.<br />
+						Если вы желаете сделать нам сюрприз, вы можете сделать это любым
+						удобным для вас способом.
+					</p>
+
+					<div class="accordion" id="gifts-accordion">
+						<div class="accordion-header">
+							Денежный подарок
+							<svg
+								class="accordion-icon"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</div>
+						<div class="accordion-body">
+							<p class="iban-desc">
+								Ваше внимание — лучший подарок для нас.<br />
+								Но если вы планируете денежный подарок, вы можете
+								воспользоваться переводом на карту:
+							</p>
+							<button id="show-iban-btn" class="show-iban-btn">
+								Показать карту
+							</button>
+
+							<div id="iban-details" class="iban-details hidden">
+								<div class="card-box">
+									<p class="iban-number" id="card-number">
+										9860 3566 2656 3858
+									</p>
+									<button id="copy-card-btn" class="copy-btn">
+										Скопировать
+									</button>
+								</div>
+								<p class="iban-name">Oybek & Shakhzoda</p>
+								<span id="copy-status" class="copy-status">Скопировано!</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="section-divider"><span>♥</span></div>
+
+			<!-- RSVP (Сложная логика и рамка) -->
+			<section class="rsvp-section section-padding" id="rsvp">
+				<div class="container text-center">
+					<h2 class="section-title">Подтвердите ваше присутствие</h2>
+					<p class="section-subtitle-dark">Мы надеемся увидеть вас</p>
+
+					<form class="rsvp-form" id="rsvp-form">
+						<div class="form-group row">
+							<input
+								type="text"
+								id="name"
+								placeholder="Имя и Фамилия *"
+								required
+							/>
+						</div>
+
+						<div class="form-group row">
+							<input
+								type="tel"
+								id="phone"
+								placeholder="Номер телефона *"
+								required
+							/>
+						</div>
+
+						<!-- Radio для присутствия -->
+						<div class="form-group label-left">
+							<label>Вы придёте? *</label>
+							<div class="radio-group">
+								<label class="custom-radio">
+									<input type="radio" name="attendance" value="yes" required />
+									<span>Да, я приду.</span>
+								</label>
+								<label class="custom-radio">
+									<input type="radio" name="attendance" value="no" />
+									<span>Я не смогу присутствовать.</span>
+								</label>
+							</div>
+						</div>
+
+						<!-- Скрытое поле компаньонов удалено по просьбе пользователя -->
+
+						<div class="form-group row">
+							<textarea
+								id="message"
+								rows="3"
+								placeholder="Послание для жениха и невесты (по желанию)"
+							></textarea>
+						</div>
+
+						<button type="submit" class="btn-elegant">Отправить</button>
+					</form>
+				</div>
+			</section>
+
+			<!-- ТЕМНЫЙ ФУТЕР КАК В ОРИГИНАЛЕ -->
+			<footer class="footer">
+				<div class="footer-heart">♥</div>
+				<div
+					style="
+						font-family: var(--font-script);
+						font-size: 1.5rem;
+						color: #a09789;
+						margin-bottom: 10px;
+						font-style: italic;
+					"
+				>
+					С любовью,
+				</div>
+				<h2 class="footer-names">Oybek & Shakhzoda</h2>
+				<p class="footer-date">11 aprel 2026</p>
+			</footer>
+		</div>
+
+		<script src="main.js"></script>
+	</body>
+</html>
