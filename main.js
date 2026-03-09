@@ -4,6 +4,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const introScreen = document.getElementById('intro-screen');
     const introVideo = document.getElementById('envelope-video');
 
+    // --- АВТОЗАПУСК МУЗЫКИ ---
+    const bgMusic = document.getElementById('bg-music');
+    let musicStarted = false;
+
+    function startMusic() {
+        if (musicStarted || !bgMusic) return;
+        bgMusic.volume = 0.5;
+        bgMusic.play().then(() => {
+            musicStarted = true;
+        }).catch(() => {});
+    }
+
+    // Попытка автозапуска сразу
+    startMusic();
+
+    // Если браузер заблокировал — запускаем при первом взаимодействии
+    function onFirstInteraction() {
+        startMusic();
+        if (musicStarted) {
+            ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
+                document.removeEventListener(evt, onFirstInteraction)
+            );
+        }
+    }
+    ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
+        document.addEventListener(evt, onFirstInteraction, { passive: true })
+    );
+
     if (introScreen && introVideo) {
         // Показываем первый кадр видео сразу при загрузке
         introVideo.addEventListener('loadeddata', () => {
@@ -11,16 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, { once: true });
         introVideo.load();
 
-        // Проигрывание видео и МУЗЫКИ по клику
+        // Проигрывание видео по клику
         introScreen.addEventListener('click', () => {
             introVideo.play().catch(e => console.log("Intro video play failed:", e));
-
-            // Запускаем музыку синхронно (из переменной audioPlayer ниже)
-            const audioPlayer = document.getElementById('bg-music');
-            if (audioPlayer) {
-                audioPlayer.volume = 0.5;
-                audioPlayer.play().catch(e => console.log("Audio prevented:", e));
-            }
         }, { once: true });
 
         // Завершение видео и переход "Flash to White"
