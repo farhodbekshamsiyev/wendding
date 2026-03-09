@@ -20,11 +20,10 @@
 	<body>
 		<!-- ИНТРО-ЭКРАН (OVERLAY) -->
 		<div id="intro-screen">
-			<video id="envelope-video" playsinline muted preload="auto" autoplay>
+			<video id="envelope-video" playsinline preload="auto">
 				<source src="video/open.webm" type="video/webm" />
 				Ваш браузер не поддерживает видео.
 			</video>
-			<div class="tap-hint">Нажмите, чтобы открыть</div>
 		</div>
 
 		<!-- ЦВЕТЫ НА ФОНЕ (Старые лепестки) -->
@@ -33,13 +32,6 @@
 		<audio id="bg-music" loop>
 			<source src="audio/hedwigs_theme.mp3" type="audio/mpeg" />
 		</audio>
-
-		<!-- ПОЛНОЭКРАННЫЙ РОСКОШНЫЙ КОНВЕРТ ЗАКОММЕНТИРОВАН -->
-		<!--
-    <div id="envelope-wrapper" class="envelope-wrapper">
-        ... (старый код конверта) ...
-    </div>
-    -->
 
 		<div id="main-content" class="main-content hidden">
 			<!-- HERO -->
