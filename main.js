@@ -33,16 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (introScreen && introVideo) {
-        // Показываем первый кадр видео сразу при загрузке
+        // Автозапуск видео сразу при загрузке
         introVideo.addEventListener('loadeddata', () => {
-            introVideo.currentTime = 0.001;
+            introVideo.play().catch(e => console.log("Intro video play failed:", e));
+            startMusic();
         }, { once: true });
         introVideo.load();
-
-        // Проигрывание видео по клику
-        introScreen.addEventListener('click', () => {
-            introVideo.play().catch(e => console.log("Intro video play failed:", e));
-        }, { once: true });
 
         // Завершение видео и переход "Flash to White"
         introVideo.addEventListener('ended', () => {
